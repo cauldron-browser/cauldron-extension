@@ -11,6 +11,12 @@ chrome.storage.sync.get('caching', function(items) {
         "href": tab.url,
         "access_time": Date.now(),
       };
+
+      var rx = /https:\/\/www\.google\.(.*)\/search\?(.*)q=(.*?)&(.*)/g;
+      var arr = rx.exec(tab.url);
+     
+      if (arr)
+        data["query"] = decodeURIComponent(arr[3]).split('+').join(' ')
       console.log(data);
     }
     // $.post('http://localhost:2222/visit', data = data);
