@@ -11,12 +11,12 @@
   "background": {
     "scripts": [
       "src/bg/background.js",
-      "vendor/jquery.min.js"
+      "src/vendor/jquery.min.js"
     ],
     "persistent": true
   },
   "browser_action": {
-    "default_icon": "icons/icon16.png",
+    "default_icon": "icons/icon16bw.png",
     "default_popup": "src/popup/popup.html"
   },
   "options_page": "src/options/index.html",
