@@ -10,19 +10,21 @@
   },
   "background": {
     "scripts": [
-      "src/bg/background.js"
+      "src/bg/background.js",
+      "vendor/jquery.min.js"
     ],
     "persistent": true
   },
   "browser_action": {
     "default_icon": "icons/icon16.png",
-    "default_popup": "popup.html"
+    "default_popup": "src/popup/popup.html"
   },
   "options_page": "src/options/index.html",
   "permissions": [
     "history",
     "storage",
     "tabs",
+    "http://*/*",
     "https://*/*"
   ]
 }
