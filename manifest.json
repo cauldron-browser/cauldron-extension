@@ -15,6 +15,7 @@
     ],
     "persistent": true
   },
+  "omnibox": { "keyword" : "cauldron" },
   "browser_action": {
     "default_icon": "icons/icon16bw.png",
     "default_popup": "src/popup/popup.html"

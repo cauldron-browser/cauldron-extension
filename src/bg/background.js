@@ -1,15 +1,10 @@
+// global that can be modified by popup
+var extension_enabled = false; 
+
 chrome.storage.sync.get('caching', function(items) {
-  var extension_enabled = false;
   if (items['caching'])
     extension_enabled = true; 
   
-  chrome.storage.onChanged.addListener(function(changes) {
-    if (changes['caching'].newValue == true)
-      extension_enabled = true;
-    else if (changes['caching'].newValue == false)
-      extension_enabled = false;
-  });
-
   chrome.tabs.onUpdated.addListener(function (tabId, changeinfo, tab) { 
     if (extension_enabled && changeinfo.status == 'complete') {
       var data = {
@@ -20,4 +15,11 @@ chrome.storage.sync.get('caching', function(items) {
     }
     // $.post('http://localhost:2222/visit', data = data);
   });
+});
+
+chrome.omnibox.onInputEntered.addListener(function (text) {
+  console.log(text);
+  //$.get('localhost:8888/search', { q: text}, function(data) {
+  //  console.log(data);
+  //});
 });
