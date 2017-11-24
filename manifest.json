@@ -14,9 +14,14 @@
     ],
     "persistent": true
   },
+  "browser_action": {
+    "default_icon": "icons/icon16.png",
+    "default_popup": "popup.html"
+  },
   "options_page": "src/options/index.html",
   "permissions": [
     "history",
+    "storage",
     "tabs",
     "https://*/*"
   ]
