@@ -2,28 +2,26 @@ $(document).ready(function() {
     var query = getUrlParameter('q');
     if (query) {
         $('#search').attr('value', query);
-        populate_results([
+        /*populate_results([
             { 
                 title: 'Dinosaurs - Wikipedia, the Free Encyclopedia', 
-                url: 'https://en.wikipedia.org/wiki/Dinosaur',
-                summary: 'Dinosaurs are a diverse group of reptiles '  +
+                path: 'https://en.wikipedia.org/wiki/Dinosaur',
+                body_text: 'Dinosaurs are a diverse group of reptiles '  +
                     'of the clade Dinosauria that first appeared during ' +
                     'the Triassic period. Although the exact origin and timing of the ...'
             },
             { 
                 title: 'Dinosaurs - Pictures and Facts', 
-                url: 'https://www.newdinosaurs.com/',
-                summary: 'Listing 10000+ pictures of dinosaurs, ' +
+                path: 'https://www.newdinosaurs.com/',
+                body_text: 'Listing 10000+ pictures of dinosaurs, ' +
                     'facts about them and other prehistoric animals, ' +
                     'bringing them closer to kids, their parents and teachers.'
             }
-        ]);
-        // $.get('http://localhost:2222/search', {'q': query}, function(data) {
-        //     populate_results(data);
-        //     var template = $("#template").clone();
-        //     template.children(".header").html(;
-        //     template.appendTo("#search-results");
-        // });
+        ]); */
+        $.get('http://localhost:5000/search', {'query': query}, function(data) {
+            console.log(data);
+            populate_results(data);
+        });
     }
 });
 
