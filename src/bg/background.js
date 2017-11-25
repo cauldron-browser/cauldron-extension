@@ -6,6 +6,17 @@ chrome.storage.sync.get('caching', function(items) {
     extension_enabled = true; 
   
   chrome.tabs.onUpdated.addListener(function (tabId, changeinfo, tab) { 
+    var rx = /https:\/\/www\.google\.(.*)\/search\?(.*)q=(.*?)&(.*)/g;
+    var arr = rx.exec(tab.url);
+    var query = undefined;
+    if (arr) 
+      query = decodeURIComponent(arr[3]).split('+').join(' ');
+
+    if (query && navigator.onLine == false) {
+      launchSearch(query);
+      return false;
+    }
+
     if (changeinfo.status != 'complete' || !extension_enabled)
       return;
 
@@ -21,12 +32,8 @@ chrome.storage.sync.get('caching', function(items) {
         "access_time": Date.now(),
       };
 
-      var rx = /https:\/\/www\.google\.(.*)\/search\?(.*)q=(.*?)&(.*)/g;
-      var arr = rx.exec(tab.url);
-      
-      if (arr)
-        data["query"] = decodeURIComponent(arr[3]).split('+').join(' ')
-      console.log(data);
+      if (query)
+        data["query"] = query;
 
       // $.post('http://localhost:2222/visit', data = data);
     }
@@ -35,8 +42,12 @@ chrome.storage.sync.get('caching', function(items) {
 
 chrome.omnibox.onInputEntered.addListener(function (text) {
   console.log(text);
+  launchSearch(text);
+});
+
+var launchSearch = function(query) {
   chrome.tabs.query({currentWindow: true, active: true}, function (tab) {
-    var url = 'src/search/results.html?q=' +  encodeURI(text);
+    var url = 'src/search/results.html?q=' +  encodeURI(query);
     chrome.tabs.update(tab.id, {url: chrome.runtime.getURL(url)});
   });
-});
+}
