@@ -8,15 +8,28 @@
 </head>
 <body>
     <div class="ui container" style="padding:15px;">
-        <h1> Cauldron </h1>
+        <h2> Cauldron </h2>
         <div class="ui form">
             <div class="inline field">
                 <div class="ui toggle checkbox">
                   <input type="checkbox" tabindex="0" class="hidden">
-                  <label>Activate Background Caching</label>
+                  <label>Activate Cauldron</label>
                 </div>
             </div>
         </div>
+        <br>
+         <form method="get" action="../search/results.html" class="ui form">
+            <div class="field">
+                <div class="label"><strong>Cauldron Search</strong></div>
+                <div class="ui icon input">
+                    <input id="search" type="text" name="q" placeholder="Search...">
+                    <i class="search icon"></i>
+                </div>
+            </div>
+            <p>
+                You can also search your cached files by typing 'cauldron' into the omnibar.
+            </p>
+        </form>
     </div>
     <script src="../vendor/jquery.min.js"></script>
     <script src="../vendor/semantic.min.js"></script>

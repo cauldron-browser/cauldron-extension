@@ -2,40 +2,48 @@ $(document).ready(function() {
     var query = getUrlParameter('q');
     if (query) {
         $('#search').attr('value', query);
-        /*populate_results([
-            { 
-                title: 'Dinosaurs - Wikipedia, the Free Encyclopedia', 
-                path: 'https://en.wikipedia.org/wiki/Dinosaur',
-                body_text: 'Dinosaurs are a diverse group of reptiles '  +
-                    'of the clade Dinosauria that first appeared during ' +
-                    'the Triassic period. Although the exact origin and timing of the ...'
-            },
-            { 
-                title: 'Dinosaurs - Pictures and Facts', 
-                path: 'https://www.newdinosaurs.com/',
-                body_text: 'Listing 10000+ pictures of dinosaurs, ' +
-                    'facts about them and other prehistoric animals, ' +
-                    'bringing them closer to kids, their parents and teachers.'
-            }
-        ]); */
+        // populate_results([
+        //     { 
+        //         title: 'Dinosaurs - Wikipedia, the Free Encyclopedia', 
+        //         path: 'https://en.wikipedia.org/wiki/Dinosaur',
+        //         body_text: 'Dinosaurs are a diverse group of reptiles '  +
+        //             'of the clade Dinosauria that first appeared during ' +
+        //             'the Triassic period. Although the exact origin and timing of the ...'
+        //     },
+        //     { 
+        //         title: 'Dinosaurs - Pictures and Facts', 
+        //         path: 'https://www.newdinosaurs.com/',
+        //         body_text: 'Listing 10000+ pictures of dinosaurs, ' +
+        //             'facts about them and other prehistoric animals, ' +
+        //             'bringing them closer to kids, their parents and teachers.'
+        //     }
+        // ]); 
         $.get('http://localhost:5000/search', {'query': query}, function(data) {
             console.log(data);
             populate_results(data);
+        })
+        .fail(function() {
+            $('#search-results').html('Error!');
         });
     }
 });
 
 var populate_results = function (data) {
-    for(var i=0; i<data.length; i++) {
-        var item = data[i];
-        var template = $("#template").clone();
-        var $header = template.find(".header")
-        $header.attr("href", item.url);
-        $header.html(item.title);
-        template.find(".extra").html(item.url);
-        template.find(".description").html(item.summary);
-        
-        template.appendTo("#search-results");
+    if (data.length == 0) {
+        $('#search-results').html('No results! :(');
+    }
+    else {
+        for(var i=0; i<data.length; i++) {
+            var item = data[i];
+            var template = $("#template").clone();
+            var $header = template.find(".header")
+            $header.attr("href", item.path);
+            $header.html(item.title);
+            template.find(".extra").html(item.path);
+            template.find(".description").html(item.body_text);
+
+            template.appendTo("#search-results");
+        }
     }
     $("#template").remove();
 };
