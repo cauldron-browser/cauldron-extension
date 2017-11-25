@@ -37,9 +37,9 @@ var populate_results = function (data) {
             var item = data[i];
             var template = $("#template").clone();
             var $header = template.find(".header")
-            $header.attr("href", item.path);
+            $header.attr("href", 'localhost:8091/retrieve/' + item.path);
             $header.html(item.title);
-            template.find(".extra").html(item.path);
+            template.find(".extra").html(item.url);
             template.find(".description").html(item.body_text);
 
             template.appendTo("#search-results");
