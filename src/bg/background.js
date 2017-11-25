@@ -6,6 +6,14 @@ chrome.storage.sync.get('caching', function(items) {
     extension_enabled = true; 
   
   chrome.tabs.onUpdated.addListener(function (tabId, changeinfo, tab) { 
+    // https://stackoverflow.com/a/26434126
+    var link = document.createElement('a');
+    link.setAttribute('href', tab.url);
+    if (link.protocol != 'http:' && link.protocol != 'https:')
+      return;
+    if (link.hostname == 'localhost')
+      return;
+
     var rx = /https:\/\/www\.google\.(.*)\/search\?(.*)q=(.*?)&(.*)/g;
     var arr = rx.exec(tab.url);
     var query = undefined;
