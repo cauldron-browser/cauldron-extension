@@ -11,8 +11,7 @@
   "background": {
     "scripts": [
       "src/bg/background.js",
-      "src/vendor/jquery.min.js",
-      "src/ep/eventPage.js"
+      "src/vendor/jquery.min.js"
     ],
     "persistent": true
   },
