@@ -18,7 +18,7 @@ $(document).ready(function() {
         //             'bringing them closer to kids, their parents and teachers.'
         //     }
         // ]); 
-        $.get('http://localhost:5000/search', {'query': query}, function(data) {
+        $.get('http://localhost:8091/search', {'query': query}, function(data) {
             console.log(data);
             populate_results(data);
         })

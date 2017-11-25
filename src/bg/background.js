@@ -21,21 +21,20 @@ chrome.storage.sync.get('caching', function(items) {
       return;
 
     if (navigator.onLine == false) {
-      alert("You're offline!");
       // $.get('http://localhost:2222/retrieve', {'href': tab.url}, function(data) {
       //   // load cached page automagically
       // });
     }
     else {
       var data = {
-        "href": tab.url,
+        "url": tab.url,
         "access_time": Date.now(),
       };
 
       if (query)
         data["query"] = query;
 
-      // $.post('http://localhost:2222/visit', data = data);
+      $.post('http://localhost:8091/visit', data = data);
     }
   });
 });
