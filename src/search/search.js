@@ -19,6 +19,7 @@ $(document).ready(function() {
         //     }
         // ]); 
         $.get('http://localhost:8091/search', {'query': query}, function(data) {
+        // $.get('http://169.254.94.140:8091/search', {'query': query}, function(data) {
             console.log(data);
             populate_results(data);
         })
@@ -38,6 +39,7 @@ var populate_results = function (data) {
             var template = $("#template").clone();
             var $header = template.find(".header")
             $header.attr("href", 'localhost:8091/retrieve/' + item.path);
+            //$header.attr("href", 'http://169.254.94.140:8091/retrieve/' + item.path);
             $header.html(item.title);
             template.find(".extra").html(item.url);
             template.find(".description").html(item.body_text);

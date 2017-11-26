@@ -21,20 +21,23 @@ chrome.storage.sync.get('caching', function(items) {
     if (arr) 
       query = decodeURIComponent(arr[3]).split('+').join(' ');
 
-    if (query && navigator.onLine == false) {
-      launchSearch(query);
+    if (navigator.onLine == false) {
+      if (query) {
+        launchSearch(query);
+      }
+      else {
+        var url = 'http://localhost:8091/retrieve/' + tab.url;
+        chrome.tabs.update(tab.id, {url: url}, function() {
+          chrome.history.deleteUrl(tab.url);
+        });
+      }
       return false;
     }
 
     if (changeinfo.status != 'complete' || !extension_enabled)
       return;
 
-    if (navigator.onLine == false) {
-      // $.get('http://localhost:2222/retrieve', {'href': tab.url}, function(data) {
-      //   // load cached page automagically
-      // });
-    }
-    else {
+    if(navigator.onLine) {
       var data = {
         "url": tab.url,
         "access_time": Date.now(),
@@ -53,6 +56,7 @@ chrome.storage.sync.get('caching', function(items) {
       }
       if (DEFAULT_BLACKLIST.indexOf(cleanhostname) == -1) {
         $.post('http://localhost:8091/visit', data = data);
+        // $.post('http://169.254.94.140:8091/visit', data = data);
       }
     }
   });
