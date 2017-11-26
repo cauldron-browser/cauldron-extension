@@ -1,6 +1,7 @@
 // global that can be modified by popup
 var extension_enabled = false; 
 
+
 chrome.storage.sync.get('caching', function(items) {
   if (items['caching'])
     extension_enabled = true; 
@@ -41,8 +42,18 @@ chrome.storage.sync.get('caching', function(items) {
 
       if (query)
         data["query"] = query;
+      else 
+        data["query"] = "";
 
-      $.post('http://localhost:8091/visit', data = data);
+      var tmp  = document.createElement ('a');
+      tmp.href   = data.url;
+      var cleanhostname = tmp.hostname
+      if(cleanhostname.indexOf('www.') === 0){
+        cleanhostname = cleanhostname.replace('www.','');
+      }
+      if (DEFAULT_BLACKLIST.indexOf(cleanhostname) == -1) {
+        $.post('http://localhost:8091/visit', data = data);
+      }
     }
   });
 });
