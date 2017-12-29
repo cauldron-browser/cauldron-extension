@@ -3,16 +3,14 @@
  *******************/
 
 b.match {
-    background-color: #ecf0f1;
-    /*background-color: #3498db;
-    color: #fafafa;*/
     padding: 2px;
+    background-color: #ecf0f1;
     color: #3498db;
-    /*text-decoration: underline;*/
 }
 
 .description {
     line-height: 1.7em !important;
+    margin-top: calc(.6em - (1.7em - 1.4285em)) !important;
 }
 
 .search-form {
