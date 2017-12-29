@@ -69,7 +69,7 @@ chrome.omnibox.onInputEntered.addListener(function (text) {
 
 var launchSearch = function(query) {
   chrome.tabs.query({currentWindow: true, active: true}, function (tab) {
-    var url = 'src/search/results.html?q=' +  encodeURI(query);
+    var url = 'src/popup/popup.html?q=' +  encodeURI(query);
     chrome.tabs.update(tab.id, {url: chrome.runtime.getURL(url)});
   });
 }

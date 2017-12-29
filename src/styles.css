@@ -18,6 +18,10 @@ b.match {
     width: 100%;
 }
 
+#templates {
+    display: none;
+}
+
 /*******************
  * POPOVER
  *******************/

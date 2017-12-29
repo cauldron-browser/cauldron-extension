@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <link rel="stylesheet" href="../vendor/semantic.min.css">
+  <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <div class="ui container" style="padding:15px;">
@@ -18,20 +19,38 @@
                 </div>
             </div>
          </h2>
-         <form method="get" action="../search/results.html" class="ui form">
+         <form method="get" action="popup.html" class="ui form">
             <div class="field">
                 <div class="ui icon input">
-                    <input id="search" type="text" name="q" placeholder="Search...">
+                    <input id="search" autocomplete="off" type="text" name="q" placeholder="Search...">
                     <i class="search icon"></i>
                 </div>
             </div>
-            <p>
-                You can also search your cached files by typing 'cauldron' into the omnibar.
-            </p>
         </form>
+        <div id="search-results" class="ui very relaxed items">
+            You can also search your cached files by typing 'cauldron' into the omnibar.
+        </div>
     </div>
+
+    <div id="templates">
+        <div id="result-template" class="item">
+          <div class="content">
+            <a class="header" href="#" target="_blank"> <!-- Title here --> </a>
+            <div class="extra">
+                <!-- plaintext url here -->
+            </div>
+            <div class="description">
+                <p>
+                    <!-- excerpt here -->
+                </p>
+            </div>
+          </div>
+        </div>
+    </div>
+
     <script src="../vendor/jquery.min.js"></script>
     <script src="../vendor/semantic.min.js"></script>
     <script src="popup.js"></script>
+    <script src="../search/search.js"></script>
 </body>
 </html>
