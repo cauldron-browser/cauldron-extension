@@ -1,6 +1,9 @@
 $(document).ready(function() {
     var query = getUrlParameter('q');
+
     if (query) {
+        query = query.replace(/\+/g, " ");
+
         $('#search').attr('value', query);
         $.get('http://localhost:8091/search', {'query': query}, function(data) {
             console.log(data);
@@ -32,7 +35,7 @@ $(document).ready(function() {
 
 var make_preview = function (text, max_length) {
     // Return an excerpt view of a string
-    var preview = text.replace("\n", " ").trim()
+    var preview = text.replace(/\n/g, " ").trim()
 
     if (preview.length > max_length) {
         preview = preview.substring(0, max_length-3).trim() + "..."
@@ -52,7 +55,6 @@ var populate_results = function (data) {
             template.attr("id", "");
             var $header = template.find(".header")
             $header.attr("href", 'localhost:8091/retrieve/' + item.path);
-            //$header.attr("href", 'http://169.254.94.140:8091/retrieve/' + item.path);
             $header.html(item.title);
             template.find(".extra").html(make_preview(item.url, 80));
             template.find(".description").html(item.body_text);
