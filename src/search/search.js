@@ -23,12 +23,23 @@ $(document).ready(function() {
     });
 });
 
+var make_preview = function (text, max_length) {
+    // Return an excerpt view of a string
+    var preview = text.replace("\n", " ").trim()
+
+    if (preview.length > max_length) {
+        preview = preview.substring(0, max_length-3).trim() + "..."
+	}
+
+    return preview
+}
+
 var populate_results = function (data) {
     if (data.length == 0) {
         $('#search-results').html('No results! :(');
     } else {
         $('#search-results').html('');
-        for(var i=0; i<data.length; i++) {
+        for(var i = 0; i < data.length; i++) {
             var item = data[i];
             var template = $("#result-template").clone();
             template.attr("id", "");
@@ -36,7 +47,7 @@ var populate_results = function (data) {
             $header.attr("href", 'localhost:8091/retrieve/' + item.path);
             //$header.attr("href", 'http://169.254.94.140:8091/retrieve/' + item.path);
             $header.html(item.title);
-            template.find(".extra").html(item.url);
+            template.find(".extra").html(make_preview(item.url, 80));
             template.find(".description").html(item.body_text);
 
             template.appendTo("#search-results");

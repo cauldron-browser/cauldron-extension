@@ -1,9 +1,11 @@
+
 /*******************
  * SEARCH RESULTS
  *******************/
 
-b.match {
+.brand, b.match {
     padding: 2px;
+    border-radius: 2px;
     background-color: #ecf0f1;
     color: #3498db;
 }
@@ -18,16 +20,23 @@ b.match {
     width: 100%;
 }
 
-#templates {
-    display: none;
-}
-
 /*******************
  * POPOVER
  *******************/
 
+#templates {
+    display: none;
+}
+
+.brand {
+	display: inline-block;
+	font-weight: 100;
+    padding: 4px 8px 4px 8px;
+}
+
 .activate-form {
     display: inline-block !important;
+	top: .5em;
     float: right !important;
     font-weight: 300 !important;
 }

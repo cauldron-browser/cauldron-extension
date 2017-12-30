@@ -1,7 +1,6 @@
 // global that can be modified by popup
 var extension_enabled = false; 
 
-
 chrome.storage.sync.get('caching', function(items) {
   if (items['caching'])
     extension_enabled = true; 
@@ -56,7 +55,6 @@ chrome.storage.sync.get('caching', function(items) {
       }
       if (DEFAULT_BLACKLIST.indexOf(cleanhostname) == -1) {
         $.post('http://localhost:8091/visit', data = data);
-        // $.post('http://169.254.94.140:8091/visit', data = data);
       }
     }
   });
