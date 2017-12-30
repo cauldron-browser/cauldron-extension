@@ -13,6 +13,13 @@ $(document).ready(function() {
 
     $('#search').keyup(function (event) {
         var query = $('#search').val();
+        // Add a wildcard at the end of the query for partial-word matches
+        // while the user types a query
+        var lastChar = query.substring(-1);
+        if (lastChar != " " && lastChar != "*") {
+            query += "*";
+        }
+
         $.get('http://localhost:8091/search', {'query': query}, function(data) {
             console.log(data);
             populate_results(data);
